@@ -1,0 +1,9 @@
+#day 00
+import os
+from tcolors import *
+
+def evaluate():
+	printh("=======Returned files======")
+	os.system("ls -la")
+	printh("=======Evaluating ex01=====")
+	os.system('')
