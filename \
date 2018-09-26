@@ -1,0 +1,11 @@
+#this ia a try at making a mini local version of the moulinette
+import os
+import sys
+
+print "-----Moulinet v01-----"
+ if len(sys.argv) != 2
+	print """Usage :
+init : initialise he moulinet in the folder
+uinit : purge all moulinet files in current directory
+grademe : evaluate user files in the directory and write traces
+<exercise id> : use this directory as containing solution to exercise with the specified id\n"""
