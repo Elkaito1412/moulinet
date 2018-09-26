@@ -2,8 +2,10 @@
 import os
 from os import walk
 import sys
+import subprocess
 from tcolors import *
 from usage import *
+from parse import parseconfig
 
 bindir = os.path.realpath(__file__)
 version = "01"
@@ -39,13 +41,24 @@ elif sys.argv[1] == "grademe":
 	if "proj_id = null" in configfile.read():
 		print(tcolors.BOLD + tcolors.FAIL + "project not chosen \n")
 	else:
-		os.system("echo project found")
+		plugins = []
+        	for (dirpath, dirnames, filenames) in walk("./projects"):
+                	plugins.extend(filenames);
+		print(tcolors.BOLD + tcolors.OKGREEN + " Grading on project : " + plugins[int(parseconfig("proj_id"))] + tcolors.ENDC)
 else:
 	plugins = []
 	for (dirpath, dirnames, filenames) in walk("./projects"):
 		plugins.extend(filenames);
-	if(int(sys.argv[1]) < len(filenames)):
-		print("loading project : " + filenames[int(sys.argv[1])])
-		os.system("cat .moulinet.conf | sed 's/proj_id = */proj_id = " + sys.argv[1] + "'/g > .moulinet.conf")
+	try:
+		projectid = int(sys.argv[1])
+	except ValueError as verr:
+		print " error in user input\n"
+		exit()
+	except Exception as ex:
+		print " error in user input\n"
+		exit()
+	if(projectid) < len(filenames):
+		print(" loading project : " + filenames[projectid])
+		os.system("sed -i 's/proj_id=[0-9]\+;/proj_id=" + str(projectid) + ";/g' .moulinet.conf")
 	else:
 		print(" project not available at the moment\n")
