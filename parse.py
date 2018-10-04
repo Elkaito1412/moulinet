@@ -1,8 +1,10 @@
 import os
 import subprocess
 
-parsedfile = open(".moulinet.conf")
-
+try:
+    parsedfile = open(".moulinet.conf")
+except IOError:
+    print '';
 def	parseconfig(value):
 	for line in parsedfile:
 		if line.startswith(value):

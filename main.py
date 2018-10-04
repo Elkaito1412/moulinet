@@ -12,17 +12,17 @@ version = "01"
 
 try:
 	configfile = open(".moulinet.conf", "r")
-except IOError:
+except IOError :
 	print(tcolors.WARNING + "WARNNG : directory not initialised" + tcolors.ENDC)
 print tcolors.HEADER + "-----Moulinet v" + version + "-----\n" + tcolors.ENDC
 if len(sys.argv) != 2 :
 	usage();
 	exit();
 elif sys.argv[1] == "init":
-	print "initialising moulinet in folder : " + tcolors.OKBLUE + os.path.abspath(__file__) + '\n'
+	print "initialising moulinet in folder : " + tcolors.OKBLUE + os.path.dirname(os.path.realpath(__file__)) + '\n'
 	os.system("cp ~/.moulinet/moulinet.default.conf ./.moulinet.conf")
 elif sys.argv[1] == "purge":
-	print "purging all moulinet files in folder : " + tcolors.OKBLUE + os.path.abspath(__file__) + '\n'
+	print "purging all moulinet files in folder : " + tcolors.OKBLUE + os.path.dirname(os.path.realpath(__file__)) + '\n'
 	os.system("rm -f .moulinet.conf")
 elif sys.argv[1] == "list":
 	filenum = 0;
